@@ -35,16 +35,16 @@ class LRUCache {
         if (this.head === node) return node.val;
         if (this.tail === node) {
             let t = this.tail.prev;
-            t.next = null;
+            t!.next = null;
             this.tail.prev = null;
             this.tail = t;
         } else {
-            node.prev.next = node.next;
-            node.next.prev = node.prev;
+            node.prev!.next = node.next;
+            node.next!.prev = node.prev;
         }
         node.next = this.head;
         node.prev = null;
-        this.head.prev = node;
+        this.head!.prev = node;
         this.head = node;
         return this.head.val;
     }
@@ -65,27 +65,27 @@ class LRUCache {
             if (this.head == node) return;
             if (this.tail == node) {
                 this.tail = node.prev;
-                this.tail.next = null;
+                this.tail!.next = null;
             } else {
-                node.prev.next = node.next;
-                node.next.prev = node.prev;
+                node.prev!.next = node.next;
+                node.next!.prev = node.prev;
             }
             node.next = this.head;
             node.prev = null;
-            this.head.prev = node;
+            this.head!.prev = node;
             this.head = node
         } else {
             let node = new LinkNode(key,val);
             this.map.set(key,node);
             node.next = this.head;
-            this.head.prev = node;
+            this.head!.prev = node;
             this.head = node;
             this.curSize += 1;
             if (this.curSize > this.maxSize) {
-                this.map.delete(this.tail.key);
-                let t = this.tail.prev;
-                t.next = null;
-                this.tail.prev = null;
+                this.map.delete(this.tail!.key);
+                let t = this.tail!.prev;
+                t!.next = null;
+                this.tail!.prev = null;
                 this.tail = t;
                 this.curSize -= 1
             }
